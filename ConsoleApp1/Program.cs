@@ -1,4 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.ComponentModel;
+using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 
 
@@ -9,9 +11,10 @@ internal class Solutuon
     public static void Main()
     {
 
-        int[] arr = { 1, 1, 0 ,- 1, -1 };
-        Result.plusMinus(arr);
-        
+        string time = "12:15:32:PM";
+
+        Result.timeConverter(time);
+
     }
 
 }
@@ -20,28 +23,37 @@ internal class Solutuon
 
 internal class Result
 {
-    public static void plusMinus(int[] arr)
+    public static void timeConverter(string time)
     {
-        int n = arr.Length;
-        float posNums = 0;
-        float negNums = 0;
-        float zeroNum = 0;
+        const int timeToAdd = 12;
 
-        foreach (int num in arr)
+        string hours;
+        string minutes;
+        string seconds;
+        string meridium;
+
+        List<String> hoursMinSec = time.Split(':').ToList();
+
+        hours = hoursMinSec[0];
+        minutes = hoursMinSec[1];
+        seconds = hoursMinSec[2];
+        meridium = hoursMinSec[3];
+
+
+        if (meridium[0] != 'P')
         {
-            if(num > 0) { posNums++; }
-            if(num < 0) { negNums++; }
-            if(num == 0) { zeroNum++; }
+            Console.WriteLine($"{hours}:{minutes}:{seconds}:{meridium}");
         }
-
-        float posNumDiv = posNums / n;
-        double num2 = Math.Round(posNumDiv, 4);
-        Console.WriteLine(num2);
-       
-        Console.Write(posNumDiv.ToString("F5") );
-        
-        
-        
+        else
+        {
+            if(int.TryParse(hours, out int hourTime))
+            {
+                hourTime += timeToAdd;
+                if(hourTime == 24) { hourTime = 00; }
+                meridium = "PM";
+            }
+            Console.WriteLine($"{hourTime}:{minutes}:{seconds}:{meridium}");
+        }
 
     }
 }
