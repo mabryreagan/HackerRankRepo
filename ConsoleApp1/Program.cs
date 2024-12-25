@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Numerics;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 
 
@@ -11,49 +13,46 @@ internal class Solutuon
     public static void Main()
     {
 
-        string time = "12:15:32:PM";
-
-        Result.timeConverter(time);
-
+        string time = "12:15:32:AM";
+        Result.TimeConverter(time);
+      
     }
 
 }
 
 
 
-internal class Result
+public class Result
 {
-    public static void timeConverter(string time)
+    internal static void TimeConverter(string time)
     {
-        const int timeToAdd = 12;
+        string meridum = time.Substring(time.Length - 2);
+        string timePart = time.Substring(0, time.Length - 2);
+        var hourMinSec = timePart.Split(':');
 
-        string hours;
-        string minutes;
-        string seconds;
-        string meridium;
+        string hours = hourMinSec[0];
+        string min = hourMinSec[1];
+        string sec = hourMinSec[2];
 
-        List<String> hoursMinSec = time.Split(':').ToList();
-
-        hours = hoursMinSec[0];
-        minutes = hoursMinSec[1];
-        seconds = hoursMinSec[2];
-        meridium = hoursMinSec[3];
-
-
-        if (meridium[0] != 'P')
+        if (int.TryParse(hours, out int intHours))
         {
-            Console.WriteLine($"{hours}:{minutes}:{seconds}:{meridium}");
-        }
-        else
-        {
-            if(int.TryParse(hours, out int hourTime))
+            if (meridum == "AM" && intHours == 12)
             {
-                hourTime += timeToAdd;
-                if(hourTime == 24) { hourTime = 00; }
-                meridium = "PM";
+                intHours = 0;
             }
-            Console.WriteLine($"{hourTime}:{minutes}:{seconds}:{meridium}");
+
+            else if (meridum == "PM")
+            {
+                intHours += 12;
+            }
+
+            hours = intHours.ToString("D2");
+           
         }
 
+        Console.Write($"{hours}:{min}:{sec}");
     }
+    
+    
+
 }
