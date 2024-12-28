@@ -13,7 +13,7 @@ internal class Solutuon
     public static void Main()
     {
 
-        string time = "12:15:32:AM";
+        string time = "12:45:54:PM";
         Result.TimeConverter(time);
       
     }
@@ -36,17 +36,19 @@ public class Result
 
         if (int.TryParse(hours, out int intHours))
         {
-            if (meridum == "AM" && intHours == 12)
-            {
-                intHours = 0;
-            }
-
-            else if (meridum == "PM")
+         
+            if (meridum == "PM")
             {
                 intHours += 12;
+                if(intHours == 24) { intHours = 0; }
+
             }
 
+
+
             hours = intHours.ToString("D2");
+            
+            
            
         }
 
