@@ -9,8 +9,10 @@ internal class Solutuon
     public static void Main()
     {
 
-        int[] arr = { 1, 1, 0 ,- 1, -1 };
-        Result.plusMinus(arr);
+        List<string> strings = new List<string> { "aba", "baba", "aba" ,"xzxb" };
+        List<string> queries = new List<string> { "aba", "xzxb", "ab" };
+       
+        Result.matchingStrings(strings , queries);
         
     }
 
@@ -20,26 +22,15 @@ internal class Solutuon
 
 internal class Result
 {
-    public static void plusMinus(int[] arr)
+    public static void matchingStrings(List<string> strings , List<string> queries)
     {
-        int n = arr.Length;
-        float posNums = 0;
-        float negNums = 0;
-        float zeroNum = 0;
 
-        foreach (int num in arr)
+        foreach (var item in queries)
         {
-            if(num > 0) { posNums++; }
-            if(num < 0) { negNums++; }
-            if(num == 0) { zeroNum++; }
-        }
+            var result = strings.Where(st => st == item);
 
-        float posNumDiv = posNums / n;
-        double num2 = Math.Round(posNumDiv, 4);
-        Console.WriteLine(num2);
-       
-        Console.Write(posNumDiv.ToString("F5") );
-        
+        }
+            
         
         
 
