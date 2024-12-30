@@ -9,10 +9,9 @@ internal class Solutuon
     public static void Main()
     {
 
-        List<string> strings = new List<string> { "aba", "baba", "aba" ,"xzxb" };
-        List<string> queries = new List<string> { "aba", "xzxb", "ab" };
-       
-        Result.matchingStrings(strings , queries);
+        List<int> nums = new List<int> { 1, 2, 3, 4, 2, 1 };
+
+        Result.LonelyInteger(nums);
         
     }
 
@@ -22,17 +21,10 @@ internal class Solutuon
 
 internal class Result
 {
-    public static void matchingStrings(List<string> strings , List<string> queries)
+    public static void LonelyInteger(List<int> nums)
     {
-
-        foreach (var item in queries)
-        {
-            var result = strings.Where(st => st == item);
-
-        }
-            
-        
-        
-
+        var results = nums.Distinct();
+        Console.WriteLine(results);
+          
     }
 }
