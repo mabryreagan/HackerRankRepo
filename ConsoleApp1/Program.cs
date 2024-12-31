@@ -9,7 +9,7 @@ internal class Solutuon
     public static void Main()
     {
 
-        List<int> nums = new List<int> { 1, 2, 3, 4, 2, 1 };
+        List<int> nums = new List<int> { 1, 2, 3, 4, 3, 2, 1 };
 
         Result.LonelyInteger(nums);
         
@@ -23,8 +23,27 @@ internal class Result
 {
     public static void LonelyInteger(List<int> nums)
     {
-        var results = nums.Distinct();
-        Console.WriteLine(results);
-          
+        int value;
+
+        foreach(int n in nums)
+        {
+
+          int result =  nums.Count(x => x == n);
+          if(result == 1)
+            {
+                value = n;
+                break;
+            }
+
+        }
+
+        
+
+      
+
+       
+
+ 
+
     }
 }
