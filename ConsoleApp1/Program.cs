@@ -1,47 +1,93 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 
-
-
-internal class Solutuon
+public class Program
 {
-    public static void Main()
+    static void Main()
     {
+        int targetSize = 32;
 
-        int[] arr = { 1, 1, 0 ,- 1, -1 };
-        Result.plusMinus(arr);
-        
-    }
+        int num = 1001;
+        string numString = num.ToString();
 
-}
+        int zeroToAppend = targetSize - numString.Length;
 
-
-
-internal class Result
-{
-    public static void plusMinus(int[] arr)
-    {
-        int n = arr.Length;
-        float posNums = 0;
-        float negNums = 0;
-        float zeroNum = 0;
-
-        foreach (int num in arr)
+        while (zeroToAppend > 0)
         {
-            if(num > 0) { posNums++; }
-            if(num < 0) { negNums++; }
-            if(num == 0) { zeroNum++; }
+            numString = '0' + numString;
+
+            zeroToAppend--;
         }
 
-        float posNumDiv = posNums / n;
-        double num2 = Math.Round(posNumDiv, 4);
-        Console.WriteLine(num2);
+
+        Results.FlipBits(numString);
        
-        Console.Write(posNumDiv.ToString("F5") );
-        
-        
+       
+    }
+
+}
+
+
+public static class Results
+{
+
+    public static void FlipBits(string num)
+    {
+
+        string flippedNum = string.Empty;
+
+        foreach (var c in num)
+        {
+            if (c == '0')
+            {
+                flippedNum = flippedNum + '1';
+            }
+            else
+            {
+                flippedNum = flippedNum + '0';
+            }
+        }
+
+        Converter.ConvertString(flippedNum);
+
+    }
+
+}
+
+
+public static class Converter
+{
+
+    public static void ConvertString(string stringToConvert)
+    {
+        int exp = 0;
+        long sum = 0;
+
+        foreach(var c in stringToConvert)
+        {
+         
+            sum += (c - '0') * (long)Math.Pow(2 ,exp);
+            exp++;
+        }
+
         
 
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
